@@ -1,43 +1,44 @@
-# Study Log App
+# Study Log App – Full-Stack Web Application
+A secure full-stack web application built with Flask that enables users to track and manage their English study sessions efficiently.
 
-## Description
-Study Log App is a web-based application designed to help users systematically track and improve their English study activities. The main goal of this project is to provide a simple but effective platform where learners can record their daily study efforts and monitor their progress over time.
+## Overview
+Study Log App is a secure full-stack web application that allows users to record, manage, and review their English study sessions.
 
-As someone who is learning English and preparing for exams such as TOEIC and IELTS, I wanted to create a tool that makes it easy to log vocabulary practice, listening sessions, speaking exercises, and other study activities. Instead of using paper notes or scattered apps, this application centralizes all study records in one place.
+The system supports user registration and authentication, and enables users to log study activities including category, content, notes, and study duration. All data is stored in a relational SQLite database and isolated per user to ensure privacy and security.
 
-Users can create an account, log in securely, and record their study sessions. Each log includes a category (such as vocabulary, listening, speaking, or reading), content description, optional notes, and the number of minutes studied. The application then stores this information in a SQLite database and allows users to review their study history and total study time.
-
-The main focus of this project is user authentication, database design, and CRUD functionality (Create, Read, Update, Delete). Each user can only access and modify their own data, ensuring privacy and data security.
+The project focuses on backend fundamentals, including authentication, relational database design, and full CRUD functionality.
 
 ## Features
-- User registration and login system
-- Password hashing for security
-- Session-based authentication
-- Add study logs (category, content, note, minutes)
-- Edit existing study logs
-- Delete study logs
-- View complete study history
-- Calculate and display total study time
-- User-specific data protection
+- Secure user registration and login system
+- Password hashing for credential protection
+- Session-based authentication and route protection
+- Full CRUD operations for study logs
+- Per-user data isolation and authorization checks
+- Automatic total study time calculation
 
-## Technologies
-- Python
-- Flask
-- SQLite
-- HTML / Jinja
-- Bootstrap
-- CS50 SQL library
+## Tech Stack
+- Backend: Python, Flask
+- Database: SQLite
+- Frontend: HTML, Jinja2, Bootstrap
+- Security: Password hashing, session management
+
+## Architecture & Design
+- Designed relational database schema with one-to-many relationship (Users → Logs)
+- Implemented foreign key constraints to maintain data integrity
+- Applied separation of concerns (authentication, database logic, UI rendering)
+- Enforced authorization checks to prevent unauthorized data access
 
 ## Database Design
-The application uses SQLite as its database. There are two main tables:
+The application uses SQLite as a relational database to store and manage user data.
+The schema is designed with a clear one-to-many relationship between users and study logs to ensure data integrity and proper user isolation.
 
-### Users table
-- id
+### Users
+- id (primary key)
 - username
-- hash (password hash)
+- hash (Password hash)
 
-### Logs table
-- id
+### Logs
+- id (primary key)
 - user_id (foreign key)
 - category
 - content
@@ -45,39 +46,64 @@ The application uses SQLite as its database. There are two main tables:
 - minutes
 - timestamp
 
-The relationship between users and logs is one-to-many. One user can have multiple study logs, but each log belongs to only one user.
+The database schema defines a one-to-many relationship between Users and Logs, enforced through a foreign key constraint to maintain referential integrity.
 
 ## Design Decisions
-One important design decision was separating users and logs into different tables and linking them with a foreign key. This ensures proper data organization and allows multiple users to use the application independently.
 
-Another decision was using session-based authentication to protect user routes. This prevents unauthorized access to other users’ data.
-
-Bootstrap was used to improve the user interface and make the application visually clean and responsive.
+- Separated Users and Logs into distinct tables to normalize data and ensure scalability.
+- Enforced foreign key constraints to maintain referential integrity and prevent orphan records.
+- Implemented session-based authentication with route protection to secure user-specific data.
+- Applied Bootstrap to ensure responsive UI design and consistent component styling.
 
 ## Challenges
-One of the main challenges was implementing secure authentication and ensuring that users cannot access or modify other users’ data. Handling database queries correctly and managing user sessions required careful attention.
-
-Another challenge was implementing edit and delete functionality while maintaining proper authorization checks.
+- Implementing secure authentication and preventing cross-user data access
+- Managing session state and authorization checks for edit/delete operations
+- Ensuring database consistency while handling user-generated data
 
 ## Future Improvements
-In the future, I would like to add:
-- Graphs to visualize study progress
-- Monthly or weekly summaries
+- Study progress visualization (graphs)
+- Weekly/monthly analytics
 - Goal-setting functionality
 - Email reminders
-- Dark mode UI
+- UI improvements (dark mode)
 
-
-## Files
+## Project Structure
 - app.py: Main Flask application
 - templates/: HTML templates
-- project.db: SQLite database
-- static/: CSS and assets (if any)
-
+- static/: CSS and assets
+- requirements.txt: Python dependencies
+  
 ## How to Run
-1. Install requirements
-2. Run `flask run`
-3. Open `http://127.0.0.1:5000` in a browser
+1. Clone the repository
+```bash
+git clone https://github.com/Jun555sml/study-log-app.git
+cd study-log-app
+```
+
+2. Install dependencies
+```bash
+pip3 install -r requirements.txt
+```
+
+3. Set environment variable (Mac / Linux)
+```bash
+export FLASK_APP=app.py
+```
+
+If you are using Windows:
+```bash
+set FLASK_APP=app.py
+```
+
+4. Run the application
+```bash
+flask run
+```
+
+5. Open in your browser:
+```
+http://127.0.0.1:5000
+```
 
 ## Video Demo
 https://youtu.be/mHmEU13_KvM
