@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Study{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title mb-4">Add Study Log</h3>
+
+                <form method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="category" class="form-select" required>
+                            <option value="">Choose</option>
+                            <option>Vocabulary</option>
+                            <option>Reading</option>
+                            <option>Speaking</option>
+                            <option>Listening</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <input name="content" type="text" placeholder="What did you study?" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Minutes</label>
+                        <input name="minutes" type="number" placeholder="e.g. 30" class="form-contorl" min="1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Note(optional)</label>
+                        <textarea name="note" placeholder="Anything to remember?" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

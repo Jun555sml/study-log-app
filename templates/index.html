@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Dashboard</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Study Summary</h5>
+                <p class="card-text">
+                    <strong>Total stusy time:</strong><br>
+                    {{ total }} minutes
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Recent Study Logs</h5>
+
+                {% if recent %}
+                    <ul class="list-group list-group-flush">
+                        {% for r in recent %}
+                            <li class="list-group-item">
+                                <strong>{{ r.category }}</strong> -
+                                {{ r.content }}
+                                {% if r.minutes %}
+                                    ({{ r.minutes }} min)
+                                {% endif %}
+                                <br>
+                                <small class="text-muted">{{ r.created_at }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">
+                        No study records yet.<br>
+                        <a href="/add">Add your frist study log</a>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<a href="/add">➕ Add new study log</a> |
+<a href="/history">📖 View all history</a>
+{% endblock %}
